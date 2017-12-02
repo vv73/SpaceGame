@@ -70,11 +70,6 @@ class Asteroid implements Updatable, Renderable, Touchable {
 		// указывала на его центр
 		dst.offset((int) (-diameter / 2), (int) (-diameter / 2));
 
-		// строчки для отладки
-		paint.setColor(Color.RED);
-		tmpVector.set(velocity.x, velocity.y).scale(100).add(coord.x, coord.y);
-		canvas.drawLine(tmpVector.x, tmpVector.y, coord.x, coord.y, paint);
-
 		// Обнуляем цвет
 		paint.setColor(Color.WHITE);
 		// Теперь повернём наш астероид.
@@ -120,20 +115,11 @@ class Asteroid implements Updatable, Renderable, Touchable {
 	    diameter += (float) (Math.sqrt(velocity.dst2(new Vector(0, 0)))) * deltaTime * 20;
 		coord.add(tmpVector.set(velocity).scale((float)(deltaTime * 20)));
 
-		// Если размер астероида больше половины высоты экрана - удаляем
-		// астероид
-
-		if (diameter > game.getHeight() / 2) {
+		if (diameter > game.getHeight() / 2)
+			game.addObject(new Explosion(BitmapFactory.decodeResource(game.getResources(), R.drawable.explosion1), this,
+					game));
+		else if (!dst.intersect(new RectF(0, 0, game.getWidth(), game.getHeight())))
 			game.removeObject(this);
-			// Ecли он еще виден на экране, то будем
-			// считать, что произошло столкновение - удаляем астероид
-			// и добавляем взрыв
-			if (dst.intersects(0, 0, game.getWidth(), game.getHeight())) {
-				game.addObject(new Explosion(BitmapFactory.decodeResource(game.getResources(), R.drawable.explosion1),
-						this, game));
-			}
-
-		}
 	}
 
 }
