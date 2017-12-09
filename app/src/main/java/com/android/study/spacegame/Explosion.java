@@ -11,6 +11,7 @@ import android.graphics.Rect;
 import com.android.study.spacegame.framework.GameView;
 import com.android.study.spacegame.framework.Renderable;
 import com.android.study.spacegame.framework.Updatable;
+import com.android.study.spacegame.framework.Vector;
 
 
 /**

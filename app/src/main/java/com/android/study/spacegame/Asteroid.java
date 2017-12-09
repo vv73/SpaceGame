@@ -11,6 +11,7 @@ import com.android.study.spacegame.framework.GameView;
 import com.android.study.spacegame.framework.Renderable;
 import com.android.study.spacegame.framework.Touchable;
 import com.android.study.spacegame.framework.Updatable;
+import com.android.study.spacegame.framework.Vector;
 
 /**
  * Это наши астероиды.
@@ -96,6 +97,7 @@ class Asteroid implements Updatable, Renderable, Touchable {
 			// и добавляем взрыв
 			game.addObject(new Explosion(BitmapFactory.decodeResource(game.getResources(), R.drawable.explosion2), this,
 					game));
+            MainActivity.changeScore(10);
 			return true;
 		}
 		return false;
