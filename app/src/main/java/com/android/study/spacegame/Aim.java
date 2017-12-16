@@ -14,7 +14,7 @@ import com.android.study.spacegame.framework.ZOrdered;
  * Created by user on 09.12.2017.
  */
 
-public class Ship implements Renderable, Updatable, Touchable, ZOrdered{
+public class Aim implements Renderable, Updatable, Touchable, ZOrdered{
     RectF rect;
     Bitmap image;
     Paint paint;
@@ -23,10 +23,10 @@ public class Ship implements Renderable, Updatable, Touchable, ZOrdered{
 
     }
 
-    Ship(float x, float y, Bitmap image)
+    Aim(float x, float y, Bitmap image)
     {
-        rect = new RectF(x - 50, y - 100,
-                x + 50, y + 100);
+        rect = new RectF(x - 50, y - 50,
+                x + 50, y + 50);
         this.image = image;
         paint = new Paint();
     }
@@ -45,18 +45,8 @@ public class Ship implements Renderable, Updatable, Touchable, ZOrdered{
 
     @Override
     public boolean onScreenTouch(float touchX, float touchY, boolean justTouched) {
-        if (justTouched){
-           if (rect.contains(touchX, touchY)) {
-               rect.set(touchX - 50, touchY - 100, touchX + 50, touchY + 100);
-               move = true;
-           }
-           else
-               move = false;
-        }
-        else{
-            if (move)
-                rect.set(touchX - 50, touchY - 100, touchX + 50, touchY + 100);
-        }
+
+              rect.set(touchX - 50, touchY - 50, touchX + 50, touchY + 50);
 
         return false;
     }

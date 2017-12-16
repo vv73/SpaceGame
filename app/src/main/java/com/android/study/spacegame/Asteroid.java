@@ -1,5 +1,6 @@
 package com.android.study.spacegame;
 
+import android.app.AlertDialog;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -95,8 +96,7 @@ class Asteroid implements Updatable, Renderable, Touchable {
 		if (justTouched && dst.contains(touchX, touchY)) {
 			game.removeObject(this);
 			// и добавляем взрыв
-			game.addObject(new Explosion(BitmapFactory.decodeResource(game.getResources(), R.drawable.explosion2), this,
-					game));
+			game.addObject(new Explosion(MainActivity.exp1Bmp, this, game));
             MainActivity.changeScore(10);
 			return true;
 		}
@@ -117,9 +117,12 @@ class Asteroid implements Updatable, Renderable, Touchable {
 	    diameter += (float) (Math.sqrt(velocity.dst2(new Vector(0, 0)))) * deltaTime * 20;
 		coord.add(tmpVector.set(velocity).scale((float)(deltaTime * 20)));
 
-		if (diameter > game.getHeight() / 2)
-			game.addObject(new Explosion(BitmapFactory.decodeResource(game.getResources(), R.drawable.explosion1), this,
-					game));
+		if (diameter > game.getHeight() / 2) {
+			game.addObject(new Explosion(MainActivity.exp2Bmp, this, game));
+			MainActivity.score -= 20;
+			MainActivity.scoreTV.setText(MainActivity.score + "");
+			game.removeObject(this);
+		}
 		else if (!dst.intersect(new RectF(0, 0, game.getWidth(), game.getHeight())))
 			game.removeObject(this);
 	}

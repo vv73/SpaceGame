@@ -178,7 +178,7 @@ public class GameView extends View {
 	                            onScreenTouch(touchX, touchY, justTouch);
 			}
 		}
-		return false;
+		return true;
 	} 
 
 
